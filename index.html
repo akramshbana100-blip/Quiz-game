@@ -1093,7 +1093,18 @@ window.generateAIQuestions = async function(){
   try {
     const p1='gsk_3R9SHIndjMIzvXbQSm'; const p2='TnWGdyb3FYhKXmyMoDMo'; const p3='3d1j2jcedZeTBw';
     const KEY=p1+p2+p3;
-    const prompt=`أنت مولّد أسئلة مسابقات باللغة العربية. أنشئ ${count} سؤال اختياري متنوع عن موضوع: "${topic}". يجب أن يكون الرد JSON فقط بدون أي نص إضافي أو backticks: [{"q":"السؤال؟","opts":["أ","ب","ج","د"],"ans":0,"cat":"${topic}"},...]`;
+    const prompt=`أنت خبير متخصص في إنشاء أسئلة مسابقات عالية الجودة باللغة العربية. أنشئ ${count} سؤال اختياري دقيق ومتنوع عن موضوع: "${topic}".
+
+شروط مهمة جداً:
+- يجب أن تكون المعلومات صحيحة 100% وموثوقة
+- الأسئلة يجب أن تكون واضحة وغير ملتبسة
+- الإجابات الخاطئة يجب أن تكون معقولة وليست واضحة جداً
+- تنوع مستويات الصعوبة (سهل، متوسط، صعب)
+- لا تكرار في الأسئلة
+
+يجب أن يكون الرد JSON فقط بدون أي نص إضافي أو backticks:
+[{"q":"السؤال؟","opts":["خيار أ","خيار ب","خيار ج","خيار د"],"ans":0,"cat":"${topic}"},...]
+حيث ans هو رقم الإجابة الصحيحة (0=أ، 1=ب، 2=ج، 3=د).`;
     const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'user',content:prompt}],temperature:0.8,max_tokens:4000})});
     const data=await res.json();
     if(data.error) throw new Error(data.error.message);
