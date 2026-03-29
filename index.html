@@ -3,36 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة الأسئلة الاحترافية 🏆</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <title>مسابقة أكرم الذكية 🏆</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #07071a; --card: #0f0f2a; --card2: #1a1a40;
-            --gold: #ffd700; --gold2: #ffaa00;
-            --white: #fff; --dim: #8892b0;
-            --correct: #00e676; --wrong: #ff1744;
-            --a: #e91e8c; --b: #00bcd4; --c: #ff6d00; --d: #7c4dff;
-            --admin: #a78bfa;
+            --bg: #0b0e14; --card: #161b22; --accent: #58a6ff;
+            --gold: #f1c40f; --danger: #f85149; --success: #3fb950;
+            --text: #c9d1d9; --white: #ffffff;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--white); min-height: 100vh; overflow-x: hidden; }
+        body { font-family: 'Tajawal', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
         
-        .screen { display: none; position: relative; z-index: 1; flex-direction: column; min-height: 100vh; }
+        .screen { display: none; min-height: 100vh; flex-direction: column; align-items: center; padding: 20px; }
         .screen.active { display: flex; }
 
-        /* Inputs & UI Elements */
-        .inp { width: 100%; background: var(--card2); border: 1.5px solid rgba(255,255,255,.1); border-radius: 10px; padding: 11px 14px; font-family: 'Tajawal', sans-serif; size: 1rem; color: var(--white); outline: none; transition: 0.2s; }
-        .inp:focus { border-color: var(--gold); }
-        .login-btn, .start-btn, .next-btn { cursor: pointer; border: none; font-family: 'Tajawal', sans-serif; font-weight: 900; transition: 0.2s; }
-        .login-btn:hover, .start-btn:hover { transform: translateY(-2px); }
+        /* تجميل العناصر */
+        .btn { cursor: pointer; border: none; border-radius: 8px; padding: 12px 24px; font-weight: 700; transition: 0.3s; font-family: 'Tajawal'; }
+        .btn-main { background: var(--accent); color: white; width: 100%; margin-top: 10px; }
+        .btn-gold { background: var(--gold); color: black; }
+        .inp { width: 100%; background: #0d1117; border: 1px solid #30363d; padding: 12px; border-radius: 8px; color: white; margin-bottom: 15px; outline: none; }
+        
+        /* واجهة اللعبة */
+        .game-header { width: 100%; max-width: 600px; display: flex; justify-content: space-between; background: var(--card); padding: 20px; border-radius: 15px; margin-bottom: 20px; border-bottom: 4px solid var(--accent); }
+        .score-box { text-align: center; flex: 1; }
+        .score-val { font-size: 2rem; font-weight: 900; color: var(--white); }
+        
+        /* إخفاء عناصر الفريق الثاني في طور السولو */
+        .solo-mode .team2-ui, .solo-mode .vs-divider { display: none !important; }
+        .solo-mode .score-box { flex: none; width: 100%; }
 
-        /* --- LOGIN SCREEN --- */
-        #login { align-items: center; justify-content: center; padding: 20px; }
-        .login-box { background: var(--card); border-radius: 24px; padding: 40px; width: 100%; max-width: 420px; border: 1.5px solid rgba(255,255,255,.07); box-shadow: 0 8px 60px rgba(0,0,0,.5); }
-        .role-tabs { display: flex; background: var(--card2); border-radius: 12px; padding: 4px; margin-bottom: 20px; }
-        .role-tab { flex: 1; padding: 10px; border: none; background: transparent; color: var(--dim); cursor: pointer; font-weight: 700; border-radius: 9px; }
-        .role-tab.active { background: var(--gold); color: #000; }
-        .login-btn { width: 100%; background: linear-gradient(135deg, var(--gold), var(--gold2)); color: #000; padding: 14px; border-radius: 12px; font-size: 1.1rem; }
+        .question-card { background: var(--card); width: 100%; max-width: 600px; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; width: 100%; }
+        .opt { background: #21262d; border: 1px solid #30363d; color: white; padding: 15px; border-radius: 10px; text-align: right; cursor: pointer; }
+        .opt.correct { background: var(--success) !important; color: white; }
+        .opt.wrong { background: var(--danger) !important; color: white; }
 
-        /* --- ADMIN PANEL --- */
-        .admin-header { background: var(--card); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center
+        /* السجل ولوحة المدير */
+        .hist-item { background: var(--card); padding: 15px; border-radius: 10px; margin-bottom: 10px; width: 100%; max-width: 500px; display: flex; justify-content: space-between; align-items: center; }
+        .del-btn { background: rgba(248, 81, 73, 0.1); color: var(--danger); border: 1px solid var(--danger); padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; }
+
+        @media (max-width: 500px) { .options-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div id="login" class="screen active">
+        <div style="margin-top: 50px; text-align: center; width: 100%; max-width: 350px;">
+            <h1 style="color: var(--gold); margin-bottom: 30px;">🎮 مسابقة الأذكياء</h1>
+            <input id="userName" class="inp" type="text" placeholder="أدخل اسمك يا بطل">
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <button id="btnSolo" class="btn btn-gold" style="flex: 1;" onclick="setMode('solo')">👤 فردي</button>
+                <button id="btnTeams" class="btn" style="flex: 1; background: #21262d; color: white;" onclick="setMode('teams')">👥 فريقين</button>
+            </div>
+            <button class="btn btn-main" onclick="startApp()">دخول للعبة</button>
+            <button style="background: transparent; color: #8b949e; margin-top: 20px; border: none; cursor: pointer;" onclick="showAdmin()">دخول كمدير ⚙️</button>
+        </div>
+    </div>
+
+    <div id="admin" class="screen">
+        <h2 style="margin-bottom: 20px;">⚙️ لوحة التحكم</h2>
+        <div style="width: 100%; max-width: 500px;">
+            <button class="btn btn-main" style="background: var(--success); margin-bottom: 20px;" onclick="showTab('addQ')">إضافة سؤال جديد</button>
+            <button class="btn btn-main" style="background: var(--accent); margin-bottom: 20px;" onclick="loadHistory()">عرض وحذف السجل</button>
+            <div id="adminContent"></div>
+            <button class="btn btn-main" style="background: var(--danger);" onclick="location.reload()">خروج</button>
+        </div>
+    </div>
+
+    <div id="game" class="screen">
+        <div class="game-header" id="headerUI">
+            <div class="score-box">
+                <div id="t1Name" style="color: var(--accent);">لاعب 1</div>
+                <div id="t1Score" class="score-val">0</div>
+            </div>
+            <div class="vs-divider" style="align-self: center; font-weight: 900; opacity: 0.5;">VS</div>
+            <div class="score-box team2-ui">
+                <div id="t2Name" style="color: var(--gold);">لاعب 2</div>
+                <div id="t2Score" class="score-val">0</div>
+            </div>
+        </div>
+        
+        <div class="question-card">
+            <h2 id="qText">جاري التحميل...</h2>
+            <div class="options-grid" id="optionsGrid"></div>
+        </div>
+
+        <div style="margin-top: 20px; display: flex; gap: 10px;">
+            <button class="btn btn-main" style="background: var(--accent);" onclick="addPoint(1)">+2 لـ <span id="btnT1Label">1</span></button>
+            <button class="btn btn-main team2-ui" style="background: var(--gold); color: black;" onclick="addPoint(2)">+2 لـ <span id="btnT2Label">2</span></button>
+        </div>
+        <button class="btn btn-main" style="background: white; color: black; margin-top: 20px;" onclick="nextQuestion()">السؤال التالي ←</button>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        // إعدادات Firebase الخاصة بك
+        const firebaseConfig = {
+            apiKey: "AIzaSyApsPVQFeYrloCOnJe23fOtJXC2yTpzhuI",
+            authDomain: "quiz-game-a7eae.firebaseapp.com",
+            projectId: "quiz-game-a7eae",
+            storageBucket: "quiz-game-a7eae.firebasestorage.app",
+            messagingSenderId: "987637765600",
+            appId: "1:987637765600:web:a88cd81de7610ba4358785"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // متغيرات اللعبة
+        let mode = 'solo';
+        let user = '';
+        let questions = [];
+        let currentIdx = 0;
+        let scores = { t1: 0, t2: 0 };
+
+        // تبديل الشاشات
+        window.showScreen = (id) => {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        };
+
+        // تحديد الطور
+        window.setMode = (m) => {
+            mode = m;
+            document.getElementById('btnSolo').style.background = m === 'solo' ? 'var(--gold)' : '#21262d';
+            document.getElementById('btnTeams').style.background = m === 'teams' ? 'var(--accent)' : '#21262d';
+        };
+
+        // بدء التطبيق
+        window.startApp = async () => {
+            user = document.getElementById('userName').value;
+            if(!user) return alert("من فضلك أدخل اسمك");
+            
+            const snap = await getDocs(collection(db, "questions"));
+            questions = snap.docs.map(d => d.data()).sort(() => Math.random() - 0.5).slice(0, 10);
+            
+            if(questions.length === 0) return alert("لا توجد أسئلة مضافة بعد!");
+
+            // إعداد الواجهة
+            const header = document.getElementById('headerUI');
+            if(mode === 'solo') {
+                header.classList.add('solo-mode');
+                document.getElementById('t1Name').textContent = user;
+                document.getElementById('btnT1Label').textContent = "نقاطي";
+            } else {
+                header.classList.remove('solo-mode');
+                document.getElementById('t1Name').textContent = "الفريق 1";
+                document.getElementById('t2Name').textContent = "الفريق 2";
+            }
+            
+            showScreen('game');
+            loadQuestion();
+        };
+
+        // تحميل سؤال
+        function loadQuestion() {
+            const q = questions[currentIdx];
+            document.getElementById('qText').textContent = q.q;
+            const grid = document.getElementById('optionsGrid');
+            grid.innerHTML = '';
+            q.opts.forEach((opt, i) => {
+                const b = document.createElement('button');
+                b.className = 'opt';
+                b.textContent = opt;
+                b.onclick = () => {
+                    document.querySelectorAll('.opt').forEach(el => el.style.pointerEvents = 'none');
+                    if(i === q.ans) b.classList.add('correct');
+                    else {
+                        b.classList.add('wrong');
+                        grid.children[q.ans].classList.add('correct');
+                    }
+                };
+                grid.appendChild(b);
+            });
+        }
+
+        window.addPoint = (t) => {
+            if(t === 1) scores.t1 += 2; else scores.t2 += 2;
+            document.getElementById('t1Score').textContent = scores.t1;
+            document.getElementById('t2Score').textContent = scores.t2;
+        };
+
+        window.nextQuestion = async () => {
+            if(currentIdx < questions.length - 1) {
+                currentIdx++;
+                loadQuestion();
+            } else {
+                // حفظ في السجل
+                await addDoc(collection(db, "history"), {
+                    player: user,
+                    mode: mode,
+                    score1: scores.t1,
+                    score2: mode === 'teams' ? scores.t2 : null,
+                    date: serverTimestamp()
+                });
+                alert(`انتهت اللعبة! نقاطك: ${scores.t1}`);
+                location.reload();
+            }
+        };
+
+        // وظائف المدير
+        window.showAdmin = () => {
+            const code = prompt("أدخل كود المدير:");
+            if(code === "1234") showScreen('admin');
+        };
+
+        window.loadHistory = async () => {
+            const qH = query(collection(db, "history"), orderBy("date", "desc"));
+            const snap = await getDocs(qH);
+            const container = document.getElementById('adminContent');
+            container.innerHTML = '<h3>سجل المباريات:</h3>';
+            snap.forEach(d => {
+                const data = d.data();
+                const div = document.createElement('div');
+                div.className = 'hist-item';
+                div.innerHTML = `
+                    <span>${data.player} - نقاط: ${data.score1}</span>
+                    <button class="del-btn" onclick="deleteMatch('${d.id}')">حذف 🗑️</button>
+                `;
+                container.appendChild(div);
+            });
+        };
+
+        window.deleteMatch = async (id) => {
+            if(confirm("هل تريد حذف هذه المباراة؟")) {
+                await deleteDoc(doc(db, "history", id));
+                loadHistory();
+            }
+        };
+
+        window.showTab = (tab) => {
+            if(tab === 'addQ') {
+                document.getElementById('adminContent').innerHTML = `
+                    <div style="margin-top:20px;">
+                        <input id="newQ" class="inp" placeholder="نص السؤال">
+                        <input id="o0" class="inp" placeholder="خيار 1">
+                        <input id="o1" class="inp" placeholder="خيار 2">
+                        <input id="o2" class="inp" placeholder="خيار 3">
+                        <input id="o3" class="inp" placeholder="خيار 4">
+                        <input id="newAns" class="inp" type="number" placeholder="رقم الإجابة الصحيحة (0-3)">
+                        <button class="btn btn-main" onclick="saveQ()">حفظ السؤال</button>
+                    </div>
+                `;
+            }
+        };
+
+        window.saveQ = async () => {
+            const q = document.getElementById('newQ').value;
+            const opts = [document.getElementById('o0').value, document.getElementById('o1').value, document.getElementById('o2').value, document.getElementById('o3').value];
+            const ans = parseInt(document.getElementById('newAns').value);
+            await addDoc(collection(db, "questions"), { q, opts, ans });
+            alert("تم الحفظ!");
+            showTab('addQ');
+        };
+
+    </script>
+</body>
+</html>
