@@ -922,7 +922,7 @@ window.addMem = function(team){
   const c=document.getElementById(`t${team}mems`);
   const n=c.querySelectorAll('.member-row').length+1;
   const d=document.createElement('div'); d.className='member-row';
-  d.innerHTML=`<span class="mem-num">${n}</span><input class="inp" type="text" placeholder="اسم العضو ${n}" dir="rtl" style="margin:0">`;
+  d.innerHTML=`<span class="mem-num">${n}</span><input class="inp" type="text" placeholder="اسم العضو ${n}" dir="rtl" style="margin:0"><button onclick="this.parentElement.remove()" style="background:rgba(255,23,68,.15);border:1px solid var(--wrong);border-radius:7px;padding:5px 10px;color:var(--wrong);cursor:pointer;font-size:.85rem;flex-shrink:0">✕</button>`;
   c.appendChild(d);
 };
 
@@ -1050,7 +1050,7 @@ window.confirmEnd=function(){if(confirm('إنهاء اللعبة الآن؟'))en
 // ── TIMER ──
 const CIRC=2*Math.PI*21;
 function startTimer(){
-  stopTimer(); S.timeLeft=15; updateTimerUI();
+  stopTimer(); S.timeLeft=30; updateTimerUI();
   S.timerInterval=setInterval(()=>{
     S.timeLeft--; updateTimerUI();
     if(S.timeLeft<=0){
@@ -1066,7 +1066,7 @@ function startTimer(){
 }
 function stopTimer(){clearInterval(S.timerInterval)}
 function updateTimerUI(){
-  const p=S.timeLeft/15;
+  const p=S.timeLeft/30;
   document.getElementById('timerCircle').style.strokeDashoffset=CIRC*(1-p);
   document.getElementById('timerNum').textContent=S.timeLeft;
   const c=S.timeLeft<=5?'#ff1744':S.timeLeft<=10?'#ff6d00':'#ffd700';
