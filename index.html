@@ -41,10 +41,13 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 /* ─────────────────────────────────────
    SCREEN: LOGIN
 ───────────────────────────────────── */
-#login{align-items:center;justify-content:center;padding:30px 20px;gap:0}
-.login-box{background:var(--card);border-radius:24px;padding:40px 36px;
+#login{align-items:center;justify-content:center;padding:30px 20px;gap:0;position:relative;overflow:hidden}
+#login::before{content:'';position:absolute;inset:0;z-index:0;
+  background:radial-gradient(ellipse at center,rgba(0,207,255,.04) 0%,transparent 70%)}
+.login-map{position:absolute;inset:0;z-index:0;opacity:.07;pointer-events:none;width:100%;height:100%}
+.login-box{position:relative;z-index:1;background:rgba(14,14,14,.92);border-radius:24px;padding:40px 36px;
   width:100%;max-width:420px;border:1.5px solid rgba(255,255,255,.07);
-  box-shadow:0 8px 60px rgba(0,0,0,.5)}
+  box-shadow:0 8px 60px rgba(0,0,0,.5);backdrop-filter:blur(10px)}
 .login-logo{text-align:center;margin-bottom:28px}
 .login-logo .trophy{font-size:3.5rem}
 .login-logo h1{font-size:1.8rem;font-weight:900;color:#ffffff;margin-top:8px}
@@ -361,6 +364,43 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 
 <!-- ════ LOGIN ════ -->
 <div id="login" class="screen active">
+
+  <!-- خريطة الخلفية -->
+  <svg class="login-map" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <!-- المحيطات / خلفية -->
+    <rect width="1000" height="500" fill="none"/>
+    <!-- أمريكا الشمالية -->
+    <path d="M120,60 L180,55 L220,70 L240,90 L230,120 L210,140 L200,160 L180,170 L160,165 L145,150 L130,130 L115,110 L110,85 Z" fill="white" stroke="rgba(0,207,255,.3)" stroke-width="1"/>
+    <!-- أمريكا الجنوبية -->
+    <path d="M190,195 L230,185 L255,200 L265,230 L260,270 L245,310 L225,340 L205,350 L185,335 L175,300 L172,260 L175,225 Z" fill="white" stroke="rgba(0,207,255,.3)" stroke-width="1"/>
+    <!-- أوروبا -->
+    <path d="M440,50 L480,45 L510,55 L515,75 L500,90 L480,95 L460,90 L445,75 Z" fill="white" stroke="rgba(0,207,255,.3)" stroke-width="1"/>
+    <!-- أفريقيا -->
+    <path d="M450,120 L500,110 L530,120 L545,150 L540,200 L520,250 L495,280 L470,275 L450,245 L440,200 L438,160 Z" fill="white" stroke="rgba(0,207,255,.3)" stroke-width="1"/>
+    <!-- آسيا -->
+    <path d="M540,40 L650,30 L750,45 L800,65 L810,100 L790,130 L740,145 L680,140 L630,130 L580,120 L545,100 L530,75 Z" fill="white" stroke="rgba(0,207,255,.3)" stroke-width="1"/>
+    <!-- الشرق الأوسط -->
+    <path d="M545,110 L590,105 L610,120 L605,150 L580,160 L555,150 L540,135 Z" fill="white" stroke="rgba(0,207,255,.4)" stroke-width="1"/>
+    <!-- أستراليا -->
+    <path d="M720,250 L790,240 L830,260 L835,300 L810,330 L770,335 L735,315 L715,285 Z" fill="white" stroke="rgba(0,207,255,.3)" stroke-width="1"/>
+    <!-- جرينلاند -->
+    <path d="M270,20 L320,15 L340,35 L330,60 L300,65 L275,50 Z" fill="white" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+    <!-- نهر النيل -->
+    <path d="M495,165 Q490,195 488,230 Q486,260 484,280" fill="none" stroke="rgba(0,180,255,.5)" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <!-- نهر الأمازون -->
+    <path d="M175,245 Q210,240 240,245 Q265,248 280,243" fill="none" stroke="rgba(0,180,255,.5)" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <!-- نهر المسيسيبي -->
+    <path d="M165,120 Q168,140 166,160 Q164,178 162,195" fill="none" stroke="rgba(0,180,255,.4)" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <!-- نهر اليانغتسي -->
+    <path d="M700,95 Q720,100 740,98 Q760,96 775,100" fill="none" stroke="rgba(0,180,255,.4)" stroke-width="1.2" stroke-dasharray="3,2"/>
+    <!-- خطوط الشبكة -->
+    <line x1="0" y1="250" x2="1000" y2="250" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+    <line x1="500" y1="0" x2="500" y2="500" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+    <line x1="0" y1="125" x2="1000" y2="125" stroke="rgba(255,255,255,.03)" stroke-width="0.5"/>
+    <line x1="0" y1="375" x2="1000" y2="375" stroke="rgba(255,255,255,.03)" stroke-width="0.5"/>
+    <line x1="250" y1="0" x2="250" y2="500" stroke="rgba(255,255,255,.03)" stroke-width="0.5"/>
+    <line x1="750" y1="0" x2="750" y2="500" stroke="rgba(255,255,255,.03)" stroke-width="0.5"/>
+  </svg>
   <div class="login-box">
     <div class="login-logo">
       <div class="trophy">🏆</div>
@@ -622,6 +662,43 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
     <div class="reveal-ans" id="revealAns"></div>
   </div>
 </div>
+<!-- Edit Modal -->
+<div id="editModal" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.85);align-items:center;justify-content:center;padding:20px">
+  <div style="background:#141414;border-radius:18px;padding:24px;width:100%;max-width:480px;border:1.5px solid rgba(167,139,250,.3)">
+    <h3 style="color:#a78bfa;font-size:1.05rem;font-weight:800;margin-bottom:16px">✏️ تعديل السؤال</h3>
+    <input type="hidden" id="editQId">
+    <div class="field">
+      <label class="label">نص السؤال</label>
+      <input class="inp" id="editQText" type="text" dir="rtl" placeholder="نص السؤال">
+    </div>
+    <div class="opts-row">
+      <div class="field"><label class="label">الخيار أ</label><input class="inp" id="editOpt0" type="text" dir="rtl"></div>
+      <div class="field"><label class="label">الخيار ب</label><input class="inp" id="editOpt1" type="text" dir="rtl"></div>
+      <div class="field"><label class="label">الخيار ج</label><input class="inp" id="editOpt2" type="text" dir="rtl"></div>
+      <div class="field"><label class="label">الخيار د</label><input class="inp" id="editOpt3" type="text" dir="rtl"></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+      <div class="field" style="flex:1;min-width:130px;margin:0">
+        <label class="label">الإجابة الصحيحة</label>
+        <select class="correct-sel" id="editAns">
+          <option value="0">أ - الأول</option>
+          <option value="1">ب - الثاني</option>
+          <option value="2">ج - الثالث</option>
+          <option value="3">د - الرابع</option>
+        </select>
+      </div>
+      <div class="field" style="flex:1;min-width:130px;margin:0">
+        <label class="label">الفئة</label>
+        <input class="inp" id="editCat" type="text" dir="rtl">
+      </div>
+    </div>
+    <div style="display:flex;gap:10px">
+      <button onclick="saveEditQ()" style="flex:1;background:linear-gradient(135deg,#a78bfa,#7c3aed);border:none;border-radius:10px;padding:12px;font-family:'Tajawal',sans-serif;font-size:.95rem;font-weight:800;color:#fff;cursor:pointer">💾 حفظ</button>
+      <button onclick="closeEditQ()" style="flex:1;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.15);border-radius:10px;padding:12px;font-family:'Tajawal',sans-serif;font-size:.95rem;font-weight:800;color:#fff;cursor:pointer">إلغاء</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script type="module">
@@ -763,11 +840,45 @@ function renderQList(){
         <div class="q-cat">${q.cat||''}</div>
       </div>
       <div class="q-actions">
+        <button class="q-del" style="background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.4);color:#a78bfa" onclick="openEditQ('${q.id}',${i})">✏️ تعديل</button>
         <button class="q-del" onclick="deleteQ('${q.id}')">🗑 حذف</button>
       </div>`;
     list.appendChild(div);
   });
 }
+
+// ── EDIT MODAL ──
+window.openEditQ = function(id, idx){
+  const q = allQuestions[idx];
+  document.getElementById('editQId').value = id;
+  document.getElementById('editQText').value = q.q;
+  document.getElementById('editOpt0').value = q.opts[0];
+  document.getElementById('editOpt1').value = q.opts[1];
+  document.getElementById('editOpt2').value = q.opts[2];
+  document.getElementById('editOpt3').value = q.opts[3];
+  document.getElementById('editAns').value = q.ans;
+  document.getElementById('editCat').value = q.cat||'';
+  document.getElementById('editModal').style.display='flex';
+};
+
+window.closeEditQ = function(){
+  document.getElementById('editModal').style.display='none';
+};
+
+window.saveEditQ = async function(){
+  const id = document.getElementById('editQId').value;
+  const q  = document.getElementById('editQText').value.trim();
+  const opts = [0,1,2,3].map(i=>document.getElementById(`editOpt${i}`).value.trim());
+  const ans = parseInt(document.getElementById('editAns').value);
+  const cat = document.getElementById('editCat').value.trim()||'💡 معلومات عامة';
+  if(!q||opts.some(o=>!o)){ toast('❌ أكمل جميع الحقول'); return; }
+  try {
+    await setDoc(doc(db,'questions',id),{q,opts,ans,cat,order:allQuestions.findIndex(x=>x.id===id)});
+    toast('✅ تم التعديل');
+    closeEditQ();
+    await loadQuestionsAdmin();
+  } catch(e){ toast('❌ فشل التعديل'); }
+};
 
 // ── UPLOAD JSON ──
 window.handleFileUpload = async function(e){
@@ -1166,14 +1277,32 @@ window.generateAIQuestions = async function(){
     const text=data.choices?.[0]?.message?.content||'';
     const questions=JSON.parse(text.replace(/```json|```/g,'').trim());
     if(!Array.isArray(questions)||!questions.length) throw new Error('صيغة خاطئة');
-    progress.textContent=`⏳ جاري رفع ${questions.length} سؤال...`;
+
+    // تنظيف النصوص من الحروف الغريبة والرموز الشاذة
+    function cleanText(str){
+      return str
+        .replace(/[^\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF\u0020-\u007Ea-zA-Z0-9،؟!.,؛:()% ]/g,'')
+        .replace(/\s+/g,' ')
+        .trim();
+    }
+
+    const cleanedQuestions = questions.map(q=>({
+      q: cleanText(q.q),
+      opts: q.opts.map(o=>cleanText(o)),
+      ans: parseInt(q.ans),
+      cat: cleanText(q.cat||topic)
+    })).filter(q=>q.q && q.opts.every(o=>o));
+
+    if(!cleanedQuestions.length) throw new Error('لم تُولَّد أسئلة صالحة');
+
+    progress.textContent=`⏳ جاري رفع ${cleanedQuestions.length} سؤال...`;
     const oldSnap=await getDocs(collection(db,'questions'));
     const b1=writeBatch(db); oldSnap.forEach(d=>b1.delete(d.ref)); await b1.commit();
     const b2=writeBatch(db);
-    questions.forEach((q,i)=>{ const ref=doc(collection(db,'questions')); b2.set(ref,{q:q.q,opts:q.opts,ans:parseInt(q.ans),cat:q.cat||topic,order:i}); });
+    cleanedQuestions.forEach((q,i)=>{ const ref=doc(collection(db,'questions')); b2.set(ref,{q:q.q,opts:q.opts,ans:q.ans,cat:q.cat,order:i}); });
     await b2.commit();
-    progress.textContent=`✅ تم توليد ${questions.length} سؤال!`;
-    toast(`🤖 ${questions.length} سؤال جاهز!`);
+    progress.textContent=`✅ تم توليد ${cleanedQuestions.length} سؤال!`;
+    toast(`🤖 ${cleanedQuestions.length} سؤال جاهز!`);
     await loadQuestionsAdmin();
     setTimeout(()=>{progress.style.display='none'},3000);
   } catch(err){ progress.textContent=`❌ خطأ: ${err.message}`; }
