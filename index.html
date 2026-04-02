@@ -968,17 +968,6 @@
         </div>
 
         <div class="container">
-            <!-- API Configuration -->
-            <div class="admin-section">
-                <h3>⚡ إعدادات Groq API</h3>
-                <div class="form-group">
-                    <label>مفتاح API:</label>
-                    <input type="password" id="groqApiKey" placeholder="أدخل مفتاح Groq API">
-                </div>
-                <button class="btn btn-primary" type="button" onclick="app.playSound('click'); app.saveGroqApiKey()">💾 حفظ المفتاح</button>
-                <p style="color: #64748b; font-size: 0.9rem; margin-top: 10px;">احصل على مفتاح API من <a href="https://console.groq.com" target="_blank" style="color: var(--primary);">Groq Console</a></p>
-            </div>
-
             <!-- Create Custom Category -->
             <div class="admin-section">
                 <h3>➕ إنشاء فئة مخصصة</h3>
@@ -1139,7 +1128,6 @@
 
             init() {
                 this.loadData();
-                this.loadGroqApiKey();
                 this.renderCustomCategories();
                 this.renderSavedQuestionSets();
                 this.updateCategorySelects();
@@ -1213,29 +1201,6 @@
                 localStorage.setItem('customCategories', JSON.stringify(this.customCategories));
             },
 
-            loadGroqApiKey() {
-                const saved = localStorage.getItem('groqApiKey');
-                if (saved) {
-                    this.groqApiKey = saved;
-                    document.getElementById('groqApiKey').value = '••••••••';
-                } else if (this.groqApiKey) {
-                    document.getElementById('groqApiKey').value = '••••••••';
-                }
-            },
-
-            saveGroqApiKey() {
-                const key = document.getElementById('groqApiKey').value.trim();
-                if (!key || key === '••••••••') {
-                    if (!key) this.showToast('أدخل مفتاح API', 'error');
-                    return;
-                }
-                this.groqApiKey = key;
-                localStorage.setItem('groqApiKey', key);
-                document.getElementById('groqApiKey').value = '••••••••';
-                this.showToast('تم حفظ المفتاح بنجاح', 'success');
-                this.playSound('success');
-            },
-
             navigateTo(screenId) {
                 document.querySelectorAll('.screen').forEach(screen => {
                     screen.classList.remove('active');
@@ -1276,11 +1241,6 @@
             },
 
             async generateQuestionsWithGroq(category, count, difficulty) {
-                if (!this.groqApiKey) {
-                    this.showToast('يرجى تحديد مفتاح Groq API أولاً من لوحة التحكم', 'error');
-                    return null;
-                }
-
                 try {
                     const prompt = `أنشئ ${count} أسئلة متعددة الخيارات باللغة العربية عن "${category}" بمستوى صعوبة ${difficulty}.
 
@@ -1333,7 +1293,7 @@
                     return questionsData.questions || [];
                 } catch (error) {
                     console.error('Error generating questions:', error);
-                    this.showToast('خطأ: ' + error.message, 'error');
+                    this.showToast('خطأ في توليد الأسئلة: ' + error.message, 'error');
                     return null;
                 }
             },
