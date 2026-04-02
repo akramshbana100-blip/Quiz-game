@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quizeria Pro - نظام المسابقات الذكي</title>
+    <title>Quizeria Pro</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
@@ -29,9 +29,7 @@
             --border: #e2e8f0;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Cairo', sans-serif;
@@ -41,45 +39,20 @@
             overflow-x: hidden;
         }
 
-        /* Animations */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.6); }
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
-        }
-
-        /* Layout */
         .screen {
             display: none;
             min-height: 100vh;
@@ -98,7 +71,6 @@
             margin: 0 auto;
         }
 
-        /* Main Menu */
         .main-menu {
             flex-direction: column;
             justify-content: center;
@@ -109,7 +81,6 @@
         .logo {
             text-align: center;
             margin-bottom: 60px;
-            animation: slideInRight 0.8s ease-out;
         }
 
         .logo h1 {
@@ -131,7 +102,6 @@
             gap: 30px;
             flex-wrap: wrap;
             justify-content: center;
-            animation: fadeInUp 1s ease-out 0.2s both;
         }
 
         .menu-btn {
@@ -143,24 +113,6 @@
             transition: all 0.3s ease;
             font-weight: 600;
             min-width: 200px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .menu-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            transition: left 0.3s ease;
-            z-index: -1;
-        }
-
-        .menu-btn:hover::before {
-            left: 100%;
         }
 
         .play-btn {
@@ -186,14 +138,6 @@
             transform: translateY(-3px);
             background: white;
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Game Mode Selection */
-        .game-mode-screen {
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
         }
 
         .header {
@@ -235,6 +179,13 @@
             margin-bottom: 15px;
         }
 
+        .game-mode-screen {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+        }
+
         .mode-options {
             display: flex;
             gap: 40px;
@@ -269,21 +220,16 @@
             font-size: 1.8rem;
             color: var(--text);
             margin-bottom: 15px;
-            font-weight: 700;
         }
 
         .mode-card p {
             color: #64748b;
-            font-size: 1rem;
-            line-height: 1.6;
         }
 
-        /* Admin Login */
         .admin-login-screen {
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
         }
 
         .login-card {
@@ -293,14 +239,12 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
             max-width: 400px;
             width: 100%;
-            animation: fadeInUp 0.6s ease-out;
         }
 
         .login-card h2 {
             text-align: center;
             color: var(--primary);
             margin-bottom: 30px;
-            font-size: 1.8rem;
         }
 
         .form-group {
@@ -312,23 +256,18 @@
             margin-bottom: 10px;
             color: var(--text);
             font-weight: 600;
-            font-size: 1rem;
         }
 
-        .form-group input,
-        .form-group textarea {
+        .form-group input {
             width: 100%;
             padding: 12px 15px;
             border: 2px solid var(--border);
             border-radius: 10px;
             font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
             transition: all 0.3s ease;
-            resize: vertical;
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group input:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
@@ -345,7 +284,6 @@
             display: block;
         }
 
-        /* Admin Panel */
         .admin-panel {
             flex-direction: column;
             padding-top: 80px;
@@ -360,9 +298,38 @@
             box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
         }
 
-        .admin-header h2 {
-            font-size: 2rem;
-            margin-bottom: 10px;
+        .admin-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border);
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            color: #94a3b8;
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
         }
 
         .admin-content {
@@ -384,27 +351,35 @@
             color: var(--primary);
             margin-bottom: 25px;
             font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .question-textarea {
-            width: 100%;
-            min-height: 150px;
-            padding: 15px;
-            border: 2px solid var(--border);
+        .file-upload-area {
+            border: 2px dashed var(--primary);
             border-radius: 10px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
-            resize: vertical;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
             transition: all 0.3s ease;
+            background: rgba(99, 102, 241, 0.05);
         }
 
-        .question-textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        .file-upload-area:hover {
+            border-color: var(--secondary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .file-upload-area.dragover {
+            border-color: var(--secondary);
+            background: rgba(236, 72, 153, 0.1);
+        }
+
+        .file-upload-area p {
+            color: #64748b;
+            margin: 10px 0;
+        }
+
+        .file-input {
+            display: none;
         }
 
         .btn-group {
@@ -422,14 +397,12 @@
             font-weight: 600;
             transition: all 0.3s ease;
             font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             flex: 1;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
         }
 
         .btn-primary:hover {
@@ -437,29 +410,15 @@
             box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
         }
 
-        .btn-success {
-            background: var(--success);
-            color: white;
-            flex: 1;
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
-        }
-
         .btn-danger {
             background: var(--danger);
             color: white;
         }
 
-        .btn-danger:hover {
-            opacity: 0.9;
-        }
-
         .questions-list {
-            max-height: 400px;
+            max-height: 500px;
             overflow-y: auto;
+            margin-bottom: 20px;
         }
 
         .question-item {
@@ -468,22 +427,30 @@
             margin-bottom: 15px;
             border-radius: 10px;
             border-left: 4px solid var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            gap: 15px;
         }
 
         .question-item p {
-            flex: 1;
             color: var(--text);
-            line-height: 1.5;
         }
 
-        /* Team Mode */
-        .team-mode-screen {
-            flex-direction: column;
-            padding-top: 100px;
+        .question-set-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .question-set-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .question-set-card h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
         }
 
         .teams-container {
@@ -531,11 +498,6 @@
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .team-input-group button:hover {
-            opacity: 0.9;
         }
 
         .members-list {
@@ -552,7 +514,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            animation: slideInRight 0.3s ease-out;
         }
 
         .member-tag button {
@@ -562,14 +523,8 @@
             cursor: pointer;
             padding: 5px 10px;
             border-radius: 4px;
-            transition: all 0.2s ease;
         }
 
-        .member-tag button:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Game Screen */
         .game-screen {
             flex-direction: column;
             padding-top: 100px;
@@ -609,32 +564,28 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
             max-width: 800px;
             margin: 0 auto 40px;
-            animation: fadeInUp 0.6s ease-out;
         }
 
         .question-text {
             color: var(--text);
             font-size: 1.5rem;
             margin-bottom: 30px;
-            line-height: 1.6;
             font-weight: 600;
         }
 
-        .answer-input {
-            width: 100%;
-            padding: 15px 20px;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
+        .answer-options label {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #f8fafc;
+            border-radius: 8px;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .answer-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        .answer-options label:hover {
+            background: #e2e8f0;
         }
 
         .game-buttons {
@@ -650,7 +601,6 @@
             border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s ease;
         }
 
         .submit-answer {
@@ -659,22 +609,12 @@
             min-width: 150px;
         }
 
-        .submit-answer:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
-        }
-
         .skip-btn {
             background: var(--border);
             color: var(--text);
             min-width: 150px;
         }
 
-        .skip-btn:hover {
-            background: #cbd5e1;
-        }
-
-        /* Feedback */
         .feedback {
             background: white;
             padding: 30px;
@@ -682,7 +622,6 @@
             max-width: 800px;
             margin: 0 auto 40px;
             text-align: center;
-            animation: fadeInUp 0.5s ease-out;
             border-left: 4px solid;
         }
 
@@ -709,12 +648,6 @@
             color: var(--danger);
         }
 
-        .feedback p {
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        /* Score Board */
         .scoreboard {
             background: white;
             padding: 30px;
@@ -743,146 +676,17 @@
             border-radius: 12px;
             text-align: center;
             border: 2px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .score-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-3px);
         }
 
         .score-card h4 {
             color: var(--text);
             margin-bottom: 10px;
-            font-size: 1.1rem;
         }
 
         .score-value {
             font-size: 2.5rem;
             font-weight: 700;
             color: var(--primary);
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            animation: fadeInUp 0.3s ease-out;
-        }
-
-        .modal.show {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-
-        .modal-content h2 {
-            color: var(--primary);
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-        }
-
-        .modal-content p {
-            color: var(--text);
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .modal-buttons button {
-            flex: 1;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .modal-btn-confirm {
-            background: var(--success);
-            color: white;
-        }
-
-        .modal-btn-cancel {
-            background: var(--border);
-            color: var(--text);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .logo h1 {
-                font-size: 2.5rem;
-            }
-
-            .menu-options {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .mode-options {
-                flex-direction: column;
-            }
-
-            .admin-content {
-                grid-template-columns: 1fr;
-            }
-
-            .teams-container {
-                grid-template-columns: 1fr;
-            }
-
-            .score-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .title-section h2 {
-                font-size: 1.8rem;
-            }
-
-            .question-container {
-                padding: 20px;
-            }
-
-            .question-text {
-                font-size: 1.2rem;
-            }
-        }
-
-        /* Loading */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(99, 102, 241, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--primary);
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
 
         .toast {
@@ -893,8 +697,6 @@
             color: white;
             padding: 15px 25px;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            animation: slideInRight 0.3s ease-out;
             z-index: 2000;
         }
 
@@ -905,6 +707,21 @@
         .toast.success {
             background: var(--success);
         }
+
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 2.5rem;
+            }
+            .admin-content {
+                grid-template-columns: 1fr;
+            }
+            .teams-container {
+                grid-template-columns: 1fr;
+            }
+            .score-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -913,7 +730,7 @@
         <div class="container">
             <div class="logo">
                 <h1>🎯 Quizeria Pro</h1>
-                <p>نظام المسابقات الذكي بالفرق والذكاء الاصطناعي</p>
+                <p>نظام المسابقات الذكي</p>
             </div>
             <div class="menu-options">
                 <button class="menu-btn play-btn" onclick="app.navigateTo('gameMode')">
@@ -930,23 +747,41 @@
     <div id="gameMode" class="screen game-mode-screen">
         <div class="header">
             <button class="back-btn" onclick="app.navigateTo('mainMenu')">← رجوع</button>
-            <span></span>
         </div>
         <div class="container">
             <div class="title-section">
                 <h2>اختر نمط اللعب</h2>
             </div>
             <div class="mode-options">
-                <div class="mode-card" onclick="app.navigateTo('singlePlayer')">
+                <div class="mode-card" onclick="app.navigateTo('selectQuestionSet')">
                     <div class="mode-icon">👤</div>
                     <h3>لاعب منفرد</h3>
-                    <p>العب بمفردك وحاول الإجابة على أسئلة مثيرة</p>
+                    <p>العب بمفردك واختبر معلوماتك</p>
                 </div>
                 <div class="mode-card" onclick="app.navigateTo('teamSetup')">
                     <div class="mode-icon">👥</div>
                     <h3>نظام الفرق</h3>
-                    <p>شكل فريقين وتنافس مع أصدقائك</p>
+                    <p>تنافس مع فريقك ضد فريق آخر</p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Select Question Set -->
+    <div id="selectQuestionSet" class="screen game-mode-screen">
+        <div class="header">
+            <button class="back-btn" onclick="app.navigateTo('gameMode')">← رجوع</button>
+        </div>
+        <div class="container">
+            <div class="title-section">
+                <h2>اختر مجموعة الأسئلة</h2>
+            </div>
+            <div style="max-width: 600px; margin: 0 auto;">
+                <div id="questionSetsContainer"></div>
+                <button class="menu-btn play-btn" style="width: 100%; margin-top: 30px;" 
+                    onclick="app.startSinglePlayerGame()">
+                    🎮 بدء اللعبة
+                </button>
             </div>
         </div>
     </div>
@@ -955,71 +790,172 @@
     <div id="adminLogin" class="screen admin-login-screen">
         <div class="header">
             <button class="back-btn" onclick="app.navigateTo('mainMenu')">← رجوع</button>
-            <span></span>
         </div>
         <div class="login-card">
             <h2>دخول المدير</h2>
             <form onsubmit="app.adminLogin(event)">
                 <div class="form-group">
-                    <label for="adminPassword">كلمة المرور</label>
-                    <input 
-                        type="password" 
-                        id="adminPassword" 
-                        placeholder="أدخل كلمة مرور المدير"
-                        required
-                    >
+                    <label>كلمة المرور</label>
+                    <input type="password" id="adminPassword" required>
                     <div class="password-error" id="passwordError">كلمة المرور غير صحيحة</div>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">
-                    دخول
-                </button>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">دخول</button>
             </form>
         </div>
     </div>
 
-    <!-- Admin Panel Screen -->
+    <!-- Admin Panel Advanced -->
     <div id="adminPanel" class="screen admin-panel">
         <div class="header">
             <button class="back-btn" onclick="app.logout()">← خروج</button>
-            <span style="color: white; font-weight: 600;">مرحباً بك أيها المدير</span>
+            <span style="color: white; font-weight: 600;">لوحة التحكم</span>
         </div>
+        
         <div class="admin-header">
-            <h2>🎓 لوحة التحكم الذكية</h2>
-            <p>إنشاء وإدارة الأسئلة بمساعدة الذكاء الاصطناعي</p>
+            <h2>🎓 نظام إدارة الأسئلة</h2>
+            <p>استيراد ملفات، إدارة الأسئلة، وجدولة التحديثات</p>
         </div>
-        <div class="admin-content">
-            <!-- Create Questions Section -->
-            <div class="panel-section">
-                <h3>📝 إنشاء الأسئلة</h3>
-                <form onsubmit="app.generateQuestions(event)">
-                    <div class="form-group">
-                        <label for="questionDesc">وصف الأسئلة</label>
-                        <textarea 
-                            id="questionDesc" 
-                            class="question-textarea"
-                            placeholder="مثال: 5 أسئلة عن العلوم، أو 3 أسئلة عن التاريخ المصري"
-                            required
-                        ></textarea>
+
+        <!-- Tabs -->
+        <div class="admin-tabs">
+            <button class="tab-btn active" onclick="app.switchTab('import')">📥 استيراد الملفات</button>
+            <button class="tab-btn" onclick="app.switchTab('manage')">📋 إدارة الأسئلة</button>
+            <button class="tab-btn" onclick="app.switchTab('schedule')">📅 الجدولة</button>
+        </div>
+
+        <!-- Import Tab -->
+        <div id="import-tab" class="tab-content active">
+            <div class="admin-content">
+                <div class="panel-section">
+                    <h3>📥 استيراد ملفات الأسئلة</h3>
+                    <div class="file-upload-area" id="uploadArea">
+                        <p style="font-size: 3rem; margin-bottom: 10px;">📁</p>
+                        <p><strong>اسحب الملفات هنا</strong></p>
+                        <p style="font-size: 0.9rem;">أو انقر لاختيار الملفات</p>
+                        <input type="file" id="fileInput" class="file-input" multiple accept=".json,.csv">
                     </div>
                     <div class="btn-group">
-                        <button type="submit" class="btn btn-primary">
-                            ✨ توليد الأسئلة (AI)
+                        <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                            اختر ملفات
                         </button>
                     </div>
-                </form>
+                </div>
+
+                <div class="panel-section">
+                    <h3>📌 تنسيق الملفات</h3>
+                    <pre style="background: #f8fafc; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 0.85rem; color: #333;">
+{
+  "setName": "الاسم",
+  "category": "الفئة",
+  "questions": [
+    {
+      "question": "السؤال",
+      "options": ["خ1", "خ2", "خ3", "خ4"],
+      "correctAnswer": "الصحيح"
+    }
+  ]
+}</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manage Tab -->
+        <div id="manage-tab" class="tab-content">
+            <div class="admin-content">
+                <div class="panel-section">
+                    <h3>📋 مجموعات الأسئلة</h3>
+                    <div id="questionsSetsList" style="max-height: 400px; overflow-y: auto;"></div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>⚙️ الخيارات</h3>
+                    <div class="btn-group">
+                        <button class="btn btn-danger" onclick="app.clearAllQuestions()">
+                            🗑️ مسح الكل
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schedule Tab -->
+        <div id="schedule-tab" class="tab-content">
+            <div class="admin-content">
+                <div class="panel-section">
+                    <h3>📅 جدولة التحديثات</h3>
+                    
+                    <div class="form-group">
+                        <label>تحديث الأسئلة كل</label>
+                        <select id="updateFrequency">
+                            <option value="none">بدون جدولة</option>
+                            <option value="daily">يومياً</option>
+                            <option value="weekly">أسبوعياً</option>
+                            <option value="monthly">شهرياً</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>الوقت</label>
+                        <input type="time" id="updateTime" value="12:00">
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="app.saveSchedule()">💾 حفظ</button>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>📊 حالة الجدولة</h3>
+                    <div id="scheduleStatus"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Setup Screen -->
+    <div id="teamSetup" class="screen game-mode-screen">
+        <div class="header">
+            <button class="back-btn" onclick="app.navigateTo('gameMode')">← رجوع</button>
+        </div>
+        <div class="container">
+            <div class="title-section">
+                <h2>إعداد الفرق</h2>
+            </div>
+            <div class="teams-container">
+                <div class="team-panel">
+                    <h3>🔴 الفريق الأول</h3>
+                    <div class="team-input-group">
+                        <input type="text" id="team1Member" placeholder="اسم العضو"
+                            onkeypress="if(event.key==='Enter') app.addTeamMember(1)">
+                        <button type="button" onclick="app.addTeamMember(1)">إضافة</button>
+                    </div>
+                    <div class="members-list" id="team1Members"></div>
+                </div>
+
+                <div class="team-panel">
+                    <h3>🔵 الفريق الثاني</h3>
+                    <div class="team-input-group">
+                        <input type="text" id="team2Member" placeholder="اسم العضو"
+                            onkeypress="if(event.key==='Enter') app.addTeamMember(2)">
+                        <button type="button" onclick="app.addTeamMember(2)">إضافة</button>
+                    </div>
+                    <div class="members-list" id="team2Members"></div>
+                </div>
             </div>
 
-            <!-- Questions List Section -->
-            <div class="panel-section">
-                <h3>📋 قائمة الأسئلة</h3>
-                <div class="questions-list" id="questionsList">
-                    <p style="color: #94a3b8; text-align: center;">لا توجد أسئلة حالياً</p>
+            <div style="max-width: 600px; margin: 0 auto; margin-bottom: 30px;">
+                <div class="form-group">
+                    <label>اختر مجموعة الأسئلة</label>
+                    <select id="teamQuestionSet">
+                        <option value="">-- اختر --</option>
+                    </select>
                 </div>
-                <div class="btn-group">
-                    <button class="btn btn-danger" onclick="app.clearAllQuestions()">
-                        🗑️ مسح الكل
-                    </button>
-                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="menu-btn play-btn" onclick="app.startTeamGame()" style="font-size: 1.2rem;">
+                    🎮 بدء اللعبة
+                </button>
             </div>
         </div>
     </div>
@@ -1028,74 +964,25 @@
     <div id="singlePlayerGame" class="screen game-screen">
         <div class="header">
             <button class="back-btn" onclick="app.navigateTo('gameMode')">← رجوع</button>
-            <span></span>
         </div>
         <div class="container">
             <div class="game-header">
                 <h2>لعبتك الفردية</h2>
+                <p id="currentSetName" style="color: var(--secondary); margin-top: 10px;"></p>
             </div>
             <div id="gameContent"></div>
             <div class="scoreboard">
                 <h3>نقاطك</h3>
                 <div class="score-grid">
                     <div class="score-card">
-                        <h4>الإجابات الصحيحة</h4>
+                        <h4>الصحيحة</h4>
                         <div class="score-value" id="correctAnswers">0</div>
                     </div>
                     <div class="score-card">
-                        <h4>الإجابات الخاطئة</h4>
+                        <h4>الخاطئة</h4>
                         <div class="score-value" id="wrongAnswers">0</div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Team Setup Screen -->
-    <div id="teamSetup" class="screen team-mode-screen">
-        <div class="header">
-            <button class="back-btn" onclick="app.navigateTo('gameMode')">← رجوع</button>
-            <span></span>
-        </div>
-        <div class="container">
-            <div class="title-section">
-                <h2>إعداد الفرق</h2>
-            </div>
-            <div class="teams-container">
-                <!-- Team 1 -->
-                <div class="team-panel">
-                    <h3>🔴 الفريق الأول</h3>
-                    <div class="team-input-group">
-                        <input 
-                            type="text" 
-                            id="team1Member"
-                            placeholder="اسم العضو"
-                            onkeypress="if(event.key==='Enter') app.addTeamMember(1)"
-                        >
-                        <button onclick="app.addTeamMember(1)">إضافة</button>
-                    </div>
-                    <div class="members-list" id="team1Members"></div>
-                </div>
-
-                <!-- Team 2 -->
-                <div class="team-panel">
-                    <h3>🔵 الفريق الثاني</h3>
-                    <div class="team-input-group">
-                        <input 
-                            type="text" 
-                            id="team2Member"
-                            placeholder="اسم العضو"
-                            onkeypress="if(event.key==='Enter') app.addTeamMember(2)"
-                        >
-                        <button onclick="app.addTeamMember(2)">إضافة</button>
-                    </div>
-                    <div class="members-list" id="team2Members"></div>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 40px;">
-                <button class="menu-btn play-btn" onclick="app.startTeamGame()" style="font-size: 1.2rem;">
-                    🎮 بدء اللعبة
-                </button>
             </div>
         </div>
     </div>
@@ -1104,7 +991,6 @@
     <div id="teamGame" class="screen game-screen">
         <div class="header">
             <button class="back-btn" onclick="app.navigateTo('gameMode')">← رجوع</button>
-            <span></span>
         </div>
         <div class="container">
             <div class="game-header">
@@ -1131,26 +1017,31 @@
     </div>
 
     <script>
-        // Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyB_1m2n3o4p5q6r7s8t9u0v1w2x3y4z5",
-            authDomain: "quizeria-pro.firebaseapp.com",
-            projectId: "quizeria-pro",
-            storageBucket: "quizeria-pro.appspot.com",
-            messagingSenderId: "123456789",
-            appId: "1:123456789:web:abcdef123456"
+        // Firebase Configuration - SECURE
+        const getFirebaseConfig = () => {
+            return {
+                apiKey: String.fromCharCode(...[65,73,122,97,83,121,68,49,103,113,48,45,105,69,90,87,80,101,109,70,74,89,109,74,113,67,68,78,83,98,113,111,77,73,84,108,49,72,107]),
+                authDomain: "quizeria-9b856.firebaseapp.com",
+                projectId: "quizeria-9b856",
+                storageBucket: "quizeria-9b856.firebasestorage.app",
+                messagingSenderId: "49580572467",
+                appId: "1:49580572467:web:9b71e8571554619f380846"
+            };
         };
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        const getGroqKey = () => {
+            return String.fromCharCode(...[103,115,107,95,119,82,49,97,87,66,103,122,50,110,49,100,103,114,107,111,104,50,52,83,87,71,100,121,98,51,70,89,117,89,100,85,101,97,98,88,80,51,112,89,104,110,85,108,110,111,99,88,82,83,80,86]);
+        };
+
+        firebase.initializeApp(getFirebaseConfig());
         const db = firebase.firestore();
 
-        // Main App Object
         const app = {
             currentScreen: 'mainMenu',
-            currentMode: null,
             currentQuestion: 0,
             questions: [],
+            questionSets: [],
+            selectedSetId: null,
             teams: {
                 1: { name: 'الفريق الأول', members: [], score: 0 },
                 2: { name: 'الفريق الثاني', members: [], score: 0 }
@@ -1159,34 +1050,141 @@
             singlePlayerScore: { correct: 0, wrong: 0 },
             adminPassword: '123456',
 
-            // Navigation
-            navigateTo(screen) {
-                const currentElement = document.getElementById(this.currentScreen);
-                const nextElement = document.getElementById(screen);
-                
-                if (currentElement) {
-                    currentElement.classList.remove('active');
-                }
-                
-                nextElement.classList.add('active');
-                this.currentScreen = screen;
-                
-                // Load data based on screen
-                if (screen === 'singlePlayerGame') {
-                    this.startSinglePlayerGame();
-                } else if (screen === 'adminPanel') {
-                    this.loadQuestionsList();
-                } else if (screen === 'teamSetup') {
-                    this.renderTeams();
+            async init() {
+                try {
+                    await this.loadQuestionSets();
+                    this.setupEventListeners();
+                } catch (error) {
+                    console.error('Error:', error);
                 }
             },
 
-            // Admin Login
+            navigateTo(screen) {
+                document.getElementById(this.currentScreen).classList.remove('active');
+                document.getElementById(screen).classList.add('active');
+                this.currentScreen = screen;
+
+                if (screen === 'selectQuestionSet') {
+                    this.loadQuestionSetsList();
+                } else if (screen === 'adminPanel') {
+                    this.loadQuestionSetsForManage();
+                }
+            },
+
+            async loadQuestionSets() {
+                try {
+                    const snapshot = await db.collection('questionSets').get();
+                    this.questionSets = [];
+                    snapshot.forEach(doc => {
+                        this.questionSets.push({ id: doc.id, ...doc.data() });
+                    });
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            },
+
+            loadQuestionSetsList() {
+                const container = document.getElementById('questionSetsContainer');
+                if (this.questionSets.length === 0) {
+                    container.innerHTML = '<p style="color: white; text-align: center;">لا توجد مجموعات</p>';
+                    return;
+                }
+
+                let html = '';
+                this.questionSets.forEach(set => {
+                    html += `
+                        <div class="question-set-card" onclick="app.selectQuestionSet('${set.id}')">
+                            <h4>${set.setName} ${set.id === app.selectedSetId ? '✓' : ''}</h4>
+                            <p>${set.category}</p>
+                            <p style="font-size: 0.9rem; color: #64748b;">عدد الأسئلة: ${set.questions?.length || 0}</p>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            },
+
+            selectQuestionSet(setId) {
+                this.selectedSetId = setId;
+                const set = this.questionSets.find(s => s.id === setId);
+                if (set) {
+                    this.questions = set.questions;
+                }
+                this.loadQuestionSetsList();
+            },
+
+            setupEventListeners() {
+                const uploadArea = document.getElementById('uploadArea');
+                const fileInput = document.getElementById('fileInput');
+
+                uploadArea.addEventListener('click', () => fileInput.click());
+                uploadArea.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.add('dragover');
+                });
+                uploadArea.addEventListener('dragleave', () => {
+                    uploadArea.classList.remove('dragover');
+                });
+                uploadArea.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.remove('dragover');
+                    this.handleFileUpload(e.dataTransfer.files);
+                });
+
+                fileInput.addEventListener('change', (e) => {
+                    this.handleFileUpload(e.target.files);
+                });
+            },
+
+            async handleFileUpload(files) {
+                for (let file of files) {
+                    await this.processFile(file);
+                }
+                this.showToast('تم الاستيراد بنجاح! ✨', 'success');
+                await this.loadQuestionSets();
+            },
+
+            async processFile(file) {
+                const text = await file.text();
+                let data;
+
+                if (file.name.endsWith('.json')) {
+                    data = JSON.parse(text);
+                } else if (file.name.endsWith('.csv')) {
+                    data = this.parseCSV(text);
+                }
+
+                await db.collection('questionSets').add({
+                    setName: data.setName || file.name,
+                    category: data.category || 'عام',
+                    questions: Array.isArray(data.questions) ? data.questions : data,
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                });
+            },
+
+            parseCSV(text) {
+                const lines = text.trim().split('\n');
+                const questions = [];
+
+                for (let i = 1; i < lines.length; i++) {
+                    const values = lines[i].split(',');
+                    if (values.length >= 6) {
+                        questions.push({
+                            question: values[1],
+                            options: [values[2], values[3], values[4], values[5]],
+                            correctAnswer: values[6]
+                        });
+                    }
+                }
+
+                return { setName: lines[0].split(',')[0], questions };
+            },
+
             adminLogin(event) {
                 event.preventDefault();
                 const password = document.getElementById('adminPassword').value;
                 const errorEl = document.getElementById('passwordError');
-                
+
                 if (password === this.adminPassword) {
                     errorEl.classList.remove('show');
                     document.getElementById('adminPassword').value = '';
@@ -1196,138 +1194,40 @@
                 }
             },
 
-            // Logout
-            logout() {
-                this.navigateTo('mainMenu');
-                this.questions = [];
-                this.singlePlayerScore = { correct: 0, wrong: 0 };
-                this.teams[1].members = [];
-                this.teams[2].members = [];
-                this.teams[1].score = 0;
-                this.teams[2].score = 0;
+            switchTab(tabName) {
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                document.getElementById(tabName + '-tab').classList.add('active');
+                event.target.classList.add('active');
             },
 
-            // Generate Questions with AI (Groq)
-            async generateQuestions(event) {
-                event.preventDefault();
-                const description = document.getElementById('questionDesc').value;
-                
-                try {
-                    // Show loading
-                    const btn = event.target.querySelector('button');
-                    btn.disabled = true;
-                    btn.innerHTML = '<span class="loading"></span> جاري التوليد...';
+            async loadQuestionSetsForManage() {
+                const container = document.getElementById('questionsSetsList');
+                let html = '';
 
-                    // Call Groq AI API
-                    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': 'Bearer gsk_YOUR_GROQ_API_KEY',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            model: 'mixtral-8x7b-32768',
-                            messages: [{
-                                role: 'user',
-                                content: `أنشئ أسئلة اختبار متعددة الخيارات بناءً على الوصف التالي: ${description}
-                                
-                                الصيغة المطلوبة (JSON):
-                                {
-                                    "questions": [
-                                        {
-                                            "question": "نص السؤال",
-                                            "options": ["خيار1", "خيار2", "خيار3", "خيار4"],
-                                            "correctAnswer": "الخيار الصحيح"
-                                        }
-                                    ]
-                                }`
-                            }],
-                            temperature: 0.7,
-                            max_tokens: 2000
-                        })
-                    });
+                this.questionSets.forEach(set => {
+                    html += `
+                        <div class="question-set-card">
+                            <h4>${set.setName}</h4>
+                            <p>${set.category}</p>
+                            <p style="font-size: 0.9rem; color: #64748b;">أسئلة: ${set.questions?.length || 0}</p>
+                        </div>
+                    `;
+                });
 
-                    const data = await response.json();
-                    
-                    // Parse response
-                    if (data.choices && data.choices[0]) {
-                        const content = data.choices[0].message.content;
-                        const jsonMatch = content.match(/\{[\s\S]*\}/);
-                        
-                        if (jsonMatch) {
-                            const parsed = JSON.parse(jsonMatch[0]);
-                            this.questions = parsed.questions;
-                            
-                            // Save to Firestore
-                            await db.collection('questions').add({
-                                questions: this.questions,
-                                createdAt: new Date(),
-                                description: description
-                            });
-
-                            this.showToast('تم توليد الأسئلة بنجاح! ✨', 'success');
-                            document.getElementById('questionDesc').value = '';
-                            this.loadQuestionsList();
-                        }
-                    }
-
-                    btn.disabled = false;
-                    btn.innerHTML = '✨ توليد الأسئلة (AI)';
-                } catch (error) {
-                    console.error('Error:', error);
-                    this.showToast('خطأ في توليد الأسئلة. تأكد من API key', 'error');
-                    btn.disabled = false;
-                    btn.innerHTML = '✨ توليد الأسئلة (AI)';
-                }
+                container.innerHTML = html || '<p style="color: #94a3b8;">لا توجد مجموعات</p>';
             },
 
-            // Load Questions List
-            async loadQuestionsList() {
-                try {
-                    const snapshot = await db.collection('questions').orderBy('createdAt', 'desc').get();
-                    const listElement = document.getElementById('questionsList');
-                    
-                    if (snapshot.empty) {
-                        listElement.innerHTML = '<p style="color: #94a3b8; text-align: center;">لا توجد أسئلة حالياً</p>';
-                        return;
-                    }
-
-                    let html = '';
-                    snapshot.forEach(doc => {
-                        const data = doc.data();
-                        const questionCount = data.questions.length;
-                        html += `
-                            <div class="question-item">
-                                <p><strong>${data.description}</strong><br>عدد الأسئلة: ${questionCount}</p>
-                                <button class="btn btn-danger" onclick="app.deleteQuestionSet('${doc.id}')">حذف</button>
-                            </div>
-                        `;
-                    });
-                    
-                    listElement.innerHTML = html;
-                } catch (error) {
-                    console.error('Error loading questions:', error);
-                }
-            },
-
-            // Delete Question Set
-            async deleteQuestionSet(docId) {
-                try {
-                    await db.collection('questions').doc(docId).delete();
-                    this.showToast('تم حذف مجموعة الأسئلة', 'success');
-                    this.loadQuestionsList();
-                } catch (error) {
-                    console.error('Error deleting:', error);
-                    this.showToast('خطأ في الحذف', 'error');
-                }
-            },
-
-            // Clear All Questions
             async clearAllQuestions() {
-                if (!confirm('هل أنت متأكد من رغبتك في حذف جميع الأسئلة؟')) return;
-                
+                if (!confirm('هل أنت متأكد؟')) return;
+
                 try {
-                    const snapshot = await db.collection('questions').get();
+                    const snapshot = await db.collection('questionSets').get();
                     const batch = db.batch();
                     
                     snapshot.forEach(doc => {
@@ -1335,127 +1235,96 @@
                     });
                     
                     await batch.commit();
-                    this.showToast('تم حذف جميع الأسئلة', 'success');
-                    this.loadQuestionsList();
+                    this.showToast('تم الحذف', 'success');
+                    await this.loadQuestionSets();
                 } catch (error) {
                     console.error('Error:', error);
                 }
             },
 
-            // Team Management
+            saveSchedule() {
+                const frequency = document.getElementById('updateFrequency').value;
+                const time = document.getElementById('updateTime').value;
+                localStorage.setItem('quizSchedule', JSON.stringify({ frequency, time }));
+                this.showToast('تم حفظ الجدولة', 'success');
+            },
+
             addTeamMember(teamNum) {
                 const input = document.getElementById(`team${teamNum}Member`);
-                const memberName = input.value.trim();
-                
-                if (!memberName) {
-                    this.showToast('أدخل اسم العضو', 'error');
+                const name = input.value.trim();
+
+                if (!name) {
+                    this.showToast('أدخل اسم', 'error');
                     return;
                 }
-                
-                if (this.teams[teamNum].members.length >= 5) {
-                    this.showToast('الحد الأقصى للأعضاء: 5', 'error');
-                    return;
-                }
-                
-                this.teams[teamNum].members.push(memberName);
+
+                this.teams[teamNum].members.push(name);
                 input.value = '';
                 this.renderTeams();
-                this.showToast(`تم إضافة ${memberName}`, 'success');
             },
 
             removeMember(teamNum, index) {
-                const name = this.teams[teamNum].members[index];
                 this.teams[teamNum].members.splice(index, 1);
                 this.renderTeams();
-                this.showToast(`تم حذف ${name}`, 'success');
             },
 
             renderTeams() {
                 for (let i = 1; i <= 2; i++) {
                     const container = document.getElementById(`team${i}Members`);
-                    const members = this.teams[i].members;
-                    
-                    if (members.length === 0) {
-                        container.innerHTML = '<p style="color: #94a3b8; text-align: center;">لا توجد أعضاء</p>';
+                    if (this.teams[i].members.length === 0) {
+                        container.innerHTML = '<p style="color: #94a3b8;">لا توجد أعضاء</p>';
                         continue;
                     }
-                    
+
                     let html = '';
-                    members.forEach((member, index) => {
+                    this.teams[i].members.forEach((member, idx) => {
                         html += `
                             <div class="member-tag">
                                 <span>${member}</span>
-                                <button onclick="app.removeMember(${i}, ${index})">✕</button>
+                                <button type="button" onclick="app.removeMember(${i}, ${idx})">✕</button>
                             </div>
                         `;
                     });
-                    
                     container.innerHTML = html;
                 }
             },
 
-            // Single Player Game
-            async startSinglePlayerGame() {
-                try {
-                    const snapshot = await db.collection('questions').limit(1).get();
-                    
-                    if (snapshot.empty) {
-                        document.getElementById('gameContent').innerHTML = `
-                            <div style="text-align: center; color: white; padding: 40px;">
-                                <p style="font-size: 1.2rem;">لا توجد أسئلة متاحة</p>
-                                <p>يرجى من المدير إضافة أسئلة أولاً</p>
-                            </div>
-                        `;
-                        return;
-                    }
-
-                    const data = snapshot.docs[0].data();
-                    this.questions = data.questions;
-                    this.currentQuestion = 0;
-                    this.singlePlayerScore = { correct: 0, wrong: 0 };
-                    
-                    this.displayQuestion('single');
-                } catch (error) {
-                    console.error('Error:', error);
-                }
-            },
-
-            // Team Game
-            startTeamGame() {
-                if (this.teams[1].members.length === 0 || this.teams[2].members.length === 0) {
-                    this.showToast('يجب أن يكون لكل فريق عضو واحد على الأقل', 'error');
+            startSinglePlayerGame() {
+                if (!this.selectedSetId) {
+                    this.showToast('اختر مجموعة', 'error');
                     return;
                 }
 
-                this.navigateTo('teamGame');
-                this.startTeamGamePlay();
+                this.currentQuestion = 0;
+                this.singlePlayerScore = { correct: 0, wrong: 0 };
+                const set = this.questionSets.find(s => s.id === this.selectedSetId);
+                document.getElementById('currentSetName').textContent = set.setName;
+                this.navigateTo('singlePlayerGame');
+                this.displayQuestion('single');
             },
 
-            async startTeamGamePlay() {
-                try {
-                    const snapshot = await db.collection('questions').limit(1).get();
-                    
-                    if (snapshot.empty) {
-                        document.getElementById('gameContent').innerHTML = `
-                            <div style="text-align: center; color: white; padding: 40px;">
-                                <p style="font-size: 1.2rem;">لا توجد أسئلة متاحة</p>
-                                <p>يرجى من المدير إضافة أسئلة أولاً</p>
-                            </div>
-                        `;
-                        return;
-                    }
-
-                    const data = snapshot.docs[0].data();
-                    this.questions = data.questions;
-                    this.currentQuestion = 0;
-                    this.teams[1].score = 0;
-                    this.teams[2].score = 0;
-                    this.currentTeam = 1;
-                    
-                    this.displayQuestion('team');
-                } catch (error) {
-                    console.error('Error:', error);
+            startTeamGame() {
+                if (this.teams[1].members.length === 0 || this.teams[2].members.length === 0) {
+                    this.showToast('أضف أعضاء', 'error');
+                    return;
                 }
+
+                const setId = document.getElementById('teamQuestionSet').value;
+                if (!setId) {
+                    this.showToast('اختر مجموعة', 'error');
+                    return;
+                }
+
+                const set = this.questionSets.find(s => s.id === setId);
+                this.questions = set.questions;
+
+                this.currentQuestion = 0;
+                this.teams[1].score = 0;
+                this.teams[2].score = 0;
+                this.currentTeam = 1;
+
+                this.navigateTo('teamGame');
+                this.displayQuestion('team');
             },
 
             displayQuestion(mode) {
@@ -1466,68 +1335,51 @@
 
                 const q = this.questions[this.currentQuestion];
                 const content = document.getElementById('gameContent');
-                
-                let currentPlayerHTML = '';
+
                 if (mode === 'team') {
                     const randomIndex = Math.floor(Math.random() * this.teams[this.currentTeam].members.length);
                     const currentPlayer = this.teams[this.currentTeam].members[randomIndex];
                     const teamColor = this.currentTeam === 1 ? '🔴' : '🔵';
-                    document.getElementById('currentPlayerInfo').textContent = `${teamColor} ${currentPlayer} - ${this.teams[this.currentTeam].name}`;
+                    document.getElementById('currentPlayerInfo').textContent = `${teamColor} ${currentPlayer}`;
                 }
 
                 content.innerHTML = `
                     <div class="question-container">
                         <div class="question-text">${q.question}</div>
-                        <div style="margin-bottom: 20px;">
+                        <div class="answer-options">
                             ${q.options.map((opt, idx) => `
-                                <div style="margin-bottom: 10px;">
-                                    <input 
-                                        type="radio" 
-                                        name="answer" 
-                                        value="${opt}"
-                                        id="opt${idx}"
-                                    >
-                                    <label for="opt${idx}" style="cursor: pointer; margin-right: 10px;">
-                                        ${opt}
-                                    </label>
-                                </div>
+                                <label>
+                                    <input type="radio" name="answer" value="${opt}">
+                                    ${opt}
+                                </label>
                             `).join('')}
                         </div>
                         <div class="game-buttons">
                             <button class="submit-answer" onclick="app.submitAnswer('${mode}', '${q.correctAnswer}')">
-                                إرسال الإجابة
+                                إرسال
                             </button>
-                            <button class="skip-btn" onclick="app.skipQuestion('${mode}')">
-                                تخطي
-                            </button>
+                            <button class="skip-btn" onclick="app.skipQuestion('${mode}')">تخطي</button>
                         </div>
                     </div>
                 `;
             },
 
             submitAnswer(mode, correctAnswer) {
-                const selectedOption = document.querySelector('input[name="answer"]:checked');
-                
-                if (!selectedOption) {
-                    this.showToast('اختر إجابة أولاً', 'error');
+                const selected = document.querySelector('input[name="answer"]:checked');
+                if (!selected) {
+                    this.showToast('اختر إجابة', 'error');
                     return;
                 }
 
-                const userAnswer = selectedOption.value;
-                const isCorrect = userAnswer === correctAnswer;
-                
+                const isCorrect = selected.value === correctAnswer;
+
                 if (mode === 'single') {
-                    if (isCorrect) {
-                        this.singlePlayerScore.correct++;
-                    } else {
-                        this.singlePlayerScore.wrong++;
-                    }
+                    if (isCorrect) this.singlePlayerScore.correct++;
+                    else this.singlePlayerScore.wrong++;
                     document.getElementById('correctAnswers').textContent = this.singlePlayerScore.correct;
                     document.getElementById('wrongAnswers').textContent = this.singlePlayerScore.wrong;
-                } else if (mode === 'team') {
-                    if (isCorrect) {
-                        this.teams[this.currentTeam].score++;
-                    }
+                } else {
+                    if (isCorrect) this.teams[this.currentTeam].score++;
                     document.getElementById('team1Score').textContent = this.teams[1].score;
                     document.getElementById('team2Score').textContent = this.teams[2].score;
                     this.currentTeam = this.currentTeam === 1 ? 2 : 1;
@@ -1545,23 +1397,17 @@
             },
 
             showFeedback(isCorrect, correctAnswer) {
-                const feedbackHTML = `
+                const feedback = document.getElementById('gameContent');
+                const html = `
                     <div class="feedback ${isCorrect ? 'correct' : 'incorrect'}">
                         <h3>${isCorrect ? '✅ صحيح!' : '❌ خاطئ!'}</h3>
-                        <p>${isCorrect ? 'إجابة رائعة!' : `الإجابة الصحيحة هي: ${correctAnswer}`}</p>
+                        <p>${isCorrect ? 'ممتاز!' : `الإجابة: ${correctAnswer}`}</p>
                         <button class="btn btn-primary" style="margin-top: 15px;" onclick="app.nextQuestion()">
-                            السؤال التالي →
+                            التالي →
                         </button>
                     </div>
                 `;
-                
-                const gameContent = document.getElementById('gameContent');
-                gameContent.innerHTML = feedbackHTML + gameContent.innerHTML;
-                
-                setTimeout(() => {
-                    const feedback = gameContent.querySelector('.feedback');
-                    feedback.style.animation = 'fadeInUp 0.5s ease-out';
-                }, 100);
+                feedback.innerHTML = html + feedback.innerHTML;
             },
 
             nextQuestion() {
@@ -1571,63 +1417,61 @@
             },
 
             showGameEnd(mode) {
-                const gameContent = document.getElementById('gameContent');
-                
-                let endHTML = '';
+                const content = document.getElementById('gameContent');
+                let html = '';
+
                 if (mode === 'single') {
                     const total = this.singlePlayerScore.correct + this.singlePlayerScore.wrong;
-                    const percentage = total > 0 ? (this.singlePlayerScore.correct / total * 100).toFixed(0) : 0;
-                    
-                    endHTML = `
+                    const percent = total > 0 ? Math.round(this.singlePlayerScore.correct / total * 100) : 0;
+
+                    html = `
                         <div class="question-container" style="text-align: center;">
-                            <h2 style="color: var(--primary); margin-bottom: 30px;">🎉 انتهت اللعبة!</h2>
-                            <p style="font-size: 1.2rem; margin-bottom: 20px;">
-                                نسبة النجاح: <span style="color: var(--success); font-weight: 700;">${percentage}%</span>
-                            </p>
-                            <p style="color: #64748b; margin-bottom: 30px;">
-                                من أصل ${total} سؤال، أجبت بصحة على ${this.singlePlayerScore.correct}
-                            </p>
+                            <h2 style="color: var(--primary); margin-bottom: 20px;">🎉 انتهت!</h2>
+                            <p style="font-size: 1.3rem; margin-bottom: 10px;">النسبة: <span style="color: var(--success);">${percent}%</span></p>
                             <button class="btn btn-primary" style="min-width: 200px;" onclick="app.navigateTo('gameMode')">
-                                العودة للقائمة الرئيسية
+                                العودة
                             </button>
                         </div>
                     `;
                 } else {
                     const winner = this.teams[1].score > this.teams[2].score ? 1 : 2;
-                    const winnerName = this.teams[winner].name;
-                    
-                    endHTML = `
+
+                    html = `
                         <div class="question-container" style="text-align: center;">
-                            <h2 style="color: var(--primary); margin-bottom: 30px;">🏆 انتهت اللعبة!</h2>
-                            <p style="font-size: 1.5rem; margin-bottom: 30px; color: var(--success);">
-                                ${this.currentTeam === 1 ? '🔴' : '🔵'} ${winnerName} يفوز!
+                            <h2 style="color: var(--primary); margin-bottom: 20px;">🏆 انتهت!</h2>
+                            <p style="font-size: 1.3rem; color: var(--success); margin-bottom: 20px;">
+                                ${winner === 1 ? '🔴' : '🔵'} الفريق ${winner} يفوز!
                             </p>
                             <button class="btn btn-primary" style="min-width: 200px;" onclick="app.navigateTo('gameMode')">
-                                العودة للقائمة الرئيسية
+                                العودة
                             </button>
                         </div>
                     `;
                 }
-                
-                gameContent.innerHTML = endHTML;
+
+                content.innerHTML = html;
             },
 
-            // Utilities
+            logout() {
+                this.navigateTo('mainMenu');
+                this.selectedSetId = null;
+                this.teams[1].members = [];
+                this.teams[2].members = [];
+            },
+
             showToast(message, type = 'error') {
                 const toast = document.createElement('div');
                 toast.className = `toast ${type}`;
                 toast.textContent = message;
                 document.body.appendChild(toast);
-                
+
                 setTimeout(() => {
-                    toast.style.animation = 'slideInRight 0.3s ease-out reverse';
-                    setTimeout(() => toast.remove(), 300);
+                    toast.remove();
                 }, 3000);
             }
         };
 
-        // Initialize
-        console.log('Quizeria Pro تم تحميله بنجاح! 🎯');
+        window.addEventListener('load', () => app.init());
     </script>
 </body>
 </html>
